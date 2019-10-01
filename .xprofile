@@ -1,0 +1,10 @@
+#!/bin/sh
+
+dwmbar &
+unclutter &
+compton &
+nitrogen --set-tiled $HOME/Downloads/wal2.jpg &
+redshift & 
+
+
+
