@@ -42,13 +42,10 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(use-package ggtags
-:ensure t
-:config
-(add-hook 'c-mode-common-hook
-(lambda ()
-(when (derived-mode-p 'c-mode 'c++-mode)
-(ggtags-mode 1)))))
+;;(package! eglot)
+;;(package! eglot-jl)
+
+
 
 (package! pyvenv)
 ;;(use-package pipenv
@@ -69,11 +66,17 @@
 
 (package! pdf-tools)
 
-(package! org-mode
-  :recipe (:host github
-           :repo "emacs-straight/org-mode"
-           :files ("*.el" "lisp/*.el" "contrib/lisp/*.el")
-           :no-byte-compile t))
+;; (package! org-mode
+;;   :recipe (:host github
+;;            :repo "emacs-straight/org-mode"
+;;            :files ("*.el" "lisp/*.el" "contrib/lisp/*.el")
+;;            :no-byte-compile t))
 
-(package! julia-mode)
+;; (package! ggtags)
 (package! rainbow-mode)
+(package! julia-mode)
+(package! lsp-julia)
+(package! eglot-jl)
+(package! eldoc)
+(package! org-bullets)
+(package! org-ref)
