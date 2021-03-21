@@ -7,7 +7,7 @@
 ;; These are used for a number of things, particularly for GPG configuration,
 ;; some email clients, file templates and snippets.
 (setq user-full-name "John Angelis"
-      user-mail-address "john@doe.com")
+      user-mail-address "john_agelis@hotmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -22,13 +22,14 @@
 ;;(setq doom-font (font-spec :family "monospace" :size 14)
 ;;      doom-variable-pitch-font (font-spec :family "sans"))
 
-(setq doom-font (font-spec :family "TerminessTTF Nerd Font" :size 15))
+(setq doom-font (font-spec :family "TerminessTTF Nerd Font" :size 16))
+;; (setq doom-font (font-spec :family "JetBrains Mono" :size 13))
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
 ;; Setting the theme
-(setq doom-theme 'doom-dracula)
-;; (setq doom-theme 'doom-city-lights)
+;; (setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-one-light)
 
 ;; If you intend to use org, it is recommended you change this!
 (setq org-directory "~/Documents/org/")
@@ -97,14 +98,17 @@
 
 (load! "/usr/share/clang/clang-format.el")
 (require 'clang-format)
-;;(add-load-path! "/usr/share/clang/clang-format.el")
-;;(load "/usr/share/clang")
 (setq exec-path (append exec-path '("/bin/clang-format")))
 (add-to-list 'clang-format-style "LLVM")
-;;(require 'clang-format)
-(global-set-key [C-m-tab] 'clang-format-buffer)
 
+(define-key  c++-mode-map (kbd "C-c TAB") 'clang-format-buffer)
+(define-key  c-mode-map (kbd "C-c TAB") 'clang-format-buffer)
+;; (global-set-key (kbd "C-c TAB") 'clang-format-buffer)
 
+(require 'eglot)
+(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+(add-hook 'c-mode-hook 'eglot-ensure)
+(add-hook 'c++-mode-hook 'eglot-ensure)
 
 ;;(require 'auto-complete-c-headers)
 
@@ -117,21 +121,21 @@
 ;;(setq elpy-rpc-python-command "python")
 ;;(setq elpy-rpc-virtualenv-path 'current)
 
-;;(elpy-enable)  
+;;(elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
 
 ;; (add-to-list 'company-backends 'company-c-headers)
-(add-hook 'c++-mode-hook
-          (lambda () (setq flycheck-clang-include-path
-                           (list (expand-file-name "~/Programs/root6.22/include/")))))
-(add-hook 'c++-mode-hook
-          (lambda () (setq flycheck-gcc-include-path
-                           (list (expand-file-name "~/Programs/root6.22/include/")))))
-(add-hook 'c++-mode-hook
-          (lambda () (setq flycheck-cppcheck-include-path
-                           (list (expand-file-name "~/Programs/root6.22/include/")))))
-(setq irony-additional-clang-options
-      (append '("-std=c++17" "-I" "~/Programs/root6.22/include/") irony-additional-clang-options))
+;; (add-hook 'c++-mode-hook
+;;           (lambda () (setq flycheck-clang-include-path
+;;                            (list (expand-file-name "~/Programs/root6.22/include/")))))
+;; (add-hook 'c++-mode-hook
+;;           (lambda () (setq flycheck-gcc-include-path
+;;                            (list (expand-file-name "~/Programs/root6.22/include/")))))
+;; (add-hook 'c++-mode-hook
+;;           (lambda () (setq flycheck-cppcheck-include-path
+;;                            (list (expand-file-name "~/Programs/root6.22/include/")))))
+;; (setq irony-additional-clang-options
+;;       (append '("-std=c++17" "-I" "~/Programs/root6.22/include/") irony-additional-clang-options))
 
 
 
@@ -195,8 +199,8 @@
 (setq indent-tabs-mode nil)
 
 
-(add-to-list 'load-path "~/Documents/projects/Github/bm/tools/")
-(require 'basm-mode)
+;; (add-to-list 'load-path "~/Documents/projects/Github/bm/tools/")
+;; (require 'basm-mode)
 
 (use-package org-roam
   :hook
